@@ -1,26 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Instrument+Serif:ital@0;1&family=Italianno&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-paper: #F4F0E8;
+  --color-paper-secondary: #EBE6DC;
+  --color-paper-card: #FAF8F5;
+  --color-ink: #121212;
+  --color-ink-muted: #5A5751;
+  --color-ink-light: #8E8A82;
+  --color-vermillion: #D71920;
+  --color-vermillion-dark: #A91418;
+  --color-vermillion-light: #FF2B33;
+  --color-border-editorial: rgba(18, 18, 18, 0.12);
+  --color-border-red: rgba(215, 25, 32, 0.25);
+  
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-serif-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Italianno', 'Playfair Display', cursive;
+  --font-instrument: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-serif: var(--font-serif);
+  --font-serif-display: var(--font-serif-display);
+  --font-script: var(--font-script);
+  --font-instrument: var(--font-instrument);
+  --font-sans: var(--font-sans);
+  
+  --color-paper: var(--color-paper);
+  --color-paper-secondary: var(--color-paper-secondary);
+  --color-paper-card: var(--color-paper-card);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-vermillion: var(--color-vermillion);
+  --color-vermillion-dark: var(--color-vermillion-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-vermillion);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-vermillion-dark);
+}
+
+/* Typography Helpers */
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-script {
+  font-family: 'Italianno', cursive;
+}
+
+.font-instrument {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-sans-editorial {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* CRT Screen / Curved TV Frame Vignette */
+.crt-frame-border {
+  border-radius: 42px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 20px 40px -15px rgba(0, 0, 0, 0.12),
+    inset 0 0 80px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 1024px) {
+  .crt-frame-border {
+    border-radius: 56px;
+  }
+}
+
+/* Paper Grain Texture */
+.paper-grain-bg {
+  background-image: radial-gradient(rgba(18, 18, 18, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Dotted Timeline Line */
+.dotted-line-v {
+  background-image: linear-gradient(to bottom, #D71920 33%, rgba(255,255,255,0) 0%);
+  background-position: left;
+  background-size: 1.5px 10px;
+  background-repeat: repeat-y;
+}
+
+.dotted-line-v-dark {
+  background-image: linear-gradient(to bottom, rgba(18, 18, 18, 0.3) 33%, rgba(255,255,255,0) 0%);
+  background-position: left;
+  background-size: 1.5px 10px;
+  background-repeat: repeat-y;
+}
+
+/* Red Stamp Seal & Diamond Badges */
+.stamp-border {
+  border: 1.5px solid var(--color-vermillion);
+  border-radius: 50%;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.diamond-badge {
+  transform: rotate(-4deg);
+  border: 1.5px solid var(--color-vermillion);
+  background: transparent;
+  color: var(--color-vermillion);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 14px;
+  display: inline-block;
+}
+
+/* Marquee continuous scroll */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle 3D tilt hover classes */
+.tilt-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+  box-shadow: 0 25px 45px -12px rgba(18, 18, 18, 0.15);
+}
+
+/* Scanline Overlay for Hero Section */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.06) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 4px, 6px 100%;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #D71920;
+  color: #FFFFFF;
 }
